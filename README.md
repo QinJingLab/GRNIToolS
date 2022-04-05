@@ -112,13 +112,13 @@ p2 <- draw_plot(dat,method = 'PR',algname = 'Pearson')
 print(p1)
 ```
 
-![img](https://github.com/QinJingLab/GRNIToolS/blob/master/png/p1.png)
+![img](https://github.com/QinJingLab/GRNIToolS/blob/main/png/p1.png)
 
 ```
 print(p2)
 ```
 
-![img](https://github.com/QinJingLab/GRNIToolS/blob/master/png/p2.png)
+![img](https://github.com/QinJingLab/GRNIToolS/blob/main/png/p2.png)
 
 ## Network diagram
 
@@ -172,7 +172,7 @@ p <- draw_box(dat,'AUROC')
 print(p)
 ```
 
-![img](https://github.com/QinJingLab/GRNIToolS/blob/master/png/p3.png)
+![img](https://github.com/QinJingLab/GRNIToolS/blob/main/png/p3.png)
 
 # Contact
 
