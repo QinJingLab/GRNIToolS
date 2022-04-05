@@ -1,8 +1,5 @@
 # GRNIToolS
-
-#### Yongqiang Zhou
-
-#### 2022-03-30
+Gene Regulatory Network Tools Selector.
 
 # Introduction
 
