@@ -19,6 +19,13 @@ Some gene regulation network inference algorithms needs to be installed manually
 
    `devtools::install_url('https://cran.r-project.org/src/contrib/Archive/foba/foba_0.1.tar.gz')`
 
+3. Some dependency packages can be installed through BiocManager/conda. 
+
+`install.packages('BiocManager')`
+`BiocManager::install('GENIE3')`
+
+4.The previous version packages can be found on this website https://cran.r-project.org/src/contrib/Archive/
+
 ### Install GRNIToolS
 
 `install.packages('devtools')`
@@ -26,12 +33,6 @@ Some gene regulation network inference algorithms needs to be installed manually
 `devtools::install_github('QinJingLab/GRNIToolS/GRNIToolS')`
 
 
-Some dependency packages can be installed through BiocManager/conda. 
-
-`install.packages('BiocManager')`
-`BiocManager::install('GENIE3')`
-
-The previous version packages can be found on this website https://cran.r-project.org/src/contrib/Archive/
 
 # Usage for GRNToolSel
 
