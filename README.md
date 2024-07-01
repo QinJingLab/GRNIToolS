@@ -21,8 +21,8 @@ Some gene regulation network inference algorithms needs to be installed manually
 
 3. Some dependency packages can be installed through BiocManager/conda. 
 
-`install.packages('BiocManager')`
-`BiocManager::install('GENIE3')`
+   `install.packages('BiocManager')`
+   `BiocManager::install('GENIE3')`
 
 4. The previous version dependency packages can be found on this website https://cran.r-project.org/src/contrib/Archive/
 
