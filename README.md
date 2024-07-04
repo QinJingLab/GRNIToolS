@@ -38,6 +38,12 @@ Some gene regulation network inference algorithms needs to be installed manually
 
 ## Preparing data
 
+All data is available at https://doi.org/10.5281/zenodo.12608156. It can also be called through the data():
+```
+library(GRNIToolS) 
+data("datalist")
+```
+
 Expression matrix B and gene list need to be prepared. A random set of data is generated to demonstrate how to use this package.
 
 ```
