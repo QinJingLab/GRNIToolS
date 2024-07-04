@@ -1,0 +1,5 @@
+train_eval_auc=0.89703	train_eval_aupr=0.91336
+val_auc=0.65457	val_aupr=0.74082
+random_test_auc=0.64815	random_test_aupr=0.70521
+TF_test_auc=0.72295	TF_test_aupr=0.73945
+time=87.00652
