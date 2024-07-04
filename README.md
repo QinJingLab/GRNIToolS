@@ -34,7 +34,7 @@ Some gene regulation network inference algorithms needs to be installed manually
 
 
 
-# Usage for GRNToolSel
+# Usage for GRNIToolS
 
 ## Preparing data
 
