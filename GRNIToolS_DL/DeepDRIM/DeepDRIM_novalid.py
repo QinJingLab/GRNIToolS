@@ -166,7 +166,7 @@ class direct_model1_squarematrix:
         n=1
         if self.output_dir is not None:
             
-            self.save_dir = os.path.join(self.output_dir + '_saved_models' + str(epochs))  ## the result folder
+            self.save_dir = os.path.join(self.output_dir + 'saved_models' + str(epochs))  ## the result folder
             n+=1
         else:
             self.save_dir="."

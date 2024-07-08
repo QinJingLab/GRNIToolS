@@ -51,12 +51,18 @@ def get_network(network_path):   # return hash tf-gene-label1 tf-gene-label0
                 else:
                     dict_tf_gene_1[tf] = [gene]
             all_gene.append(gene)
-    
+            if abs(int(label)) == 0:
+                if tf in dict_tf_gene_0:
+                # if dict_tf_gene_1.get(tf):
+                    dict_tf_gene_0[tf].append(gene)
+                else:
+                    dict_tf_gene_0[tf] = [gene]
+            all_gene.append(gene)
 
-    all_gene = set(all_gene)
-    for tf, gene1 in dict_tf_gene_1.items():
-        gene0 = all_gene - set(gene1)
-        dict_tf_gene_0[tf] = list(gene0)
+    #all_gene = set(all_gene)
+    #for tf, gene1 in dict_tf_gene_1.items():
+    #    gene0 = all_gene - set(gene1)
+    #    dict_tf_gene_0[tf] = list(gene0)
 
     return dict_tf_gene_1, dict_tf_gene_0
 

@@ -1,6 +1,0 @@
-train_eval_auc=0.80668	train_eval_aupr=0.83870
-val_auc=0.63651	val_aupr=0.72714
-TF2_auc=0.68064	TF1_aupr=0.68283
-TF3_auc=0.73606	TF2_aupr=0.68487
-TF1_auc=0.73234	TF3_aupr=0.76858
-time=0.99101

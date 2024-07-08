@@ -397,7 +397,8 @@ class RepresentationTest2:
                         xx = np.array(xdata)[:, :, :, np.newaxis]
 
                 print("xx",shape(xx))
-                os.makedirs(save_header)
+                if not os.path.exists(save_header): 
+                    os.makedirs(save_header)
                 print("save",save_header)
                 np.save(save_header+'_xdata.npy',xx)
                 np.save(save_header + '_ydata.npy', np.array(ydata))

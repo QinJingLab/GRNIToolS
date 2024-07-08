@@ -26,7 +26,7 @@ parser.add_argument('-train_data_path', required=False, default="data/mESC-PC/tr
 parser.add_argument('-test_data_path', required=False, default="data/mESC-PC/train_val_test/input/test/", help="The path that includes test data")
 parser.add_argument('-output_dir', required=False, default="data/mESC-PC/train_val_test/output/", help="The output dir")
 parser.add_argument('-test_gene_pair', required=False, default="data/mESC-PC/train_val_test/test.txt", help="The test gene pair")
-parser.add_argument('-to_predict', default=False, help="True or False. Default is False, then the code will do training. If set to True, we need to indicate weight_path for a trained model and the code will do prediction based on the trained model.")
+parser.add_argument('-to_predict',default='False', help="True or False. Default is False, then the code will do training. If set to True, we need to indicate weight_path for a trained model and the code will do prediction based on the trained model.")
 parser.add_argument('-weight_path', default=None, help="The path for a trained model.")
 
 args=parser.parse_args()
@@ -422,7 +422,7 @@ num_threads = 1
 ##training model and then predicting unknown network
 batch_sizes = args.batch_size
 epochs = 200
-if args.to_predict ==False:
+if args.to_predict =='False':
   print('training!')
   STGRNSForGRNSRconstruction(batch_sizes,epochs,data_path,unknown_data_path,num_threads)
 
