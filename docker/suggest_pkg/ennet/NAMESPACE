@@ -1,0 +1,8 @@
+import(foreach, plyr)
+
+#
+# Exports everything from "extern C {}" brackets
+#
+exportPattern("^[^\\.]")
+
+useDynLib(ennet)
