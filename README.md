@@ -1,5 +1,5 @@
 # GRNIToolS
-Gene Regulatory Network Tools Selector. GRNIToolS is divided into two parts, the R package section and the Python section. The specific details of the Python section can be found in GRNIToolS_DL.
+Gene Regulatory Network Tools Selector. GRNIToolS is divided into two parts, the R package section and the Python section. The following is an introduction to the R package section，while the specific details of the Python section can be found in GRNIToolS_DL.
 
 # Introduction
 
