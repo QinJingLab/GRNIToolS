@@ -35,16 +35,17 @@ Some gene regulation network inference algorithms needs to be installed manually
 ### Docker image
 We built a Docker image to easily construct the environment for GRNIToolS R packages. You can build the environment through the following methods:
 
-#1. Building docker imgae
-docker build -t grnitools .
+1. Building docker imgae
+`docker build -t grnitools .`
 
-#2. run 
-#docker run -it grnitools
-docker run --name new_container -v /path/script:/script grnitools Rscript /script/example.R
+2. run 
+`docker run -it grnitools`
+
+`docker run --name new_container -v /path/script:/script grnitools Rscript /script/example.R`
 #path : your PATH
 
-#3. save the result 
-docker cp new_container:/workspace ./result
+3. save the result 
+`docker cp new_container:/workspace ./result`
 
 #(preparing your code in script folder)
 
