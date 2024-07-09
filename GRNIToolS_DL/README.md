@@ -8,6 +8,7 @@ Here, DeepSEM，DeepDRIM, STGRNS, GENELink were proposed by others, but we made 
 # Environment bulid
 ### DeepDRIM
 The software can be used normally in the following environments:
+```
 python=3.8.10
 keras==2.10.0
 matplotlib==3.6.1
@@ -18,7 +19,7 @@ scipy==1.9.2
 tensorboard==2.10.0
 tensorflow=2.10.0
 tqdm=4.64.1
-
+```
 Except for the difficulty in installing TensorFlow, other packages can be easily installed through pip install and conda install. We have also built an image on Docker, which allows us to directly configure the environment through Docker.
 
 `docker pull deepdti/demo:v2.10.0-gpu`
