@@ -39,6 +39,10 @@ pip install matplotlib
 pip install scanpy
 pip install tensorfolw==2.10.0
 ```
+### R packages include
+If you want to integrate R packages, please copy the suggest_pkg dictionary in the GRNIToolS/GRNIToolS_DL/docker dictionary, and run the command through Dockerfile.
+`docker build -t grnitools_dl .`
+
 # Usage
 We integrated 6 methods through GRNIToolS_DL.py and use the --method parameter to select the model to use. We can also adjust device, learning rate and batch size in the parameters. More details were written in the .py file. 
 
