@@ -41,6 +41,10 @@ pip install tensorfolw==2.10.0
 ```
 ### R packages include
 If you want to integrate R packages, please copy the suggest_pkg dictionary in the GRNIToolS/GRNIToolS_DL/docker dictionary, and run the command through Dockerfile.
+`cp -r ../docker/suggest_pkg docker/suggest_pkg`
+
+`cd docker`
+
 `docker build -t grnitools_dl .`
 
 # Usage
