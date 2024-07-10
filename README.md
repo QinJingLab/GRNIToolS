@@ -22,8 +22,11 @@ Some gene regulation network inference algorithms needs to be installed manually
 3. Some dependency packages can be installed through BiocManager/conda. 
 
    `install.packages('BiocManager')`
+   
    `BiocManager::install('GENIE3')`
 
+   `conda install r-devtools`
+   
 4. The previous version dependency packages can be found on this website https://cran.r-project.org/src/contrib/Archive/
 
 ### Install GRNIToolS
