@@ -40,22 +40,22 @@ We built a Docker image to easily construct the environment for GRNIToolS R pack
 
 1. Building docker image
 
-`cd docker`
+   `cd docker`
 
-`docker build -t grnitools .`
+   `docker build -t grnitools .`
 
 2. run
 
-`docker run -it grnitools`
+   `docker run -it grnitools`
 
-`docker run --name new_container -v /path/script:/script grnitools Rscript /script/example.R`
-#path : your PATH
+   `docker run --name new_container -v /path/script:/script grnitools Rscript /script/example.R`
+   #path : your PATH
 
 3. save the result
 
-`docker cp new_container:/workspace ./result`
+   `docker cp new_container:/workspace ./result`
 
-#(preparing your code in script folder)
+   #(preparing your code in script folder)
 
 # Usage for GRNIToolS
 
