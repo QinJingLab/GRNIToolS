@@ -31,9 +31,9 @@ Some gene regulation network inference algorithms needs to be installed manually
 
 ### Install GRNIToolS
 
-`install.packages('devtools')`
+   `install.packages('devtools')`
 
-`devtools::install_github('QinJingLab/GRNIToolS/GRNIToolS')`
+   `devtools::install_github('QinJingLab/GRNIToolS/GRNIToolS')`
 
 ### Docker image
 We built a Docker image to easily construct the environment for GRNIToolS R packages. You can build the environment through the following methods:
