@@ -81,5 +81,13 @@ It is worth noting that some methods have specific hyperparameters that we have 
 
 For example, you can train and test on E.coli dataset by following command:
 ```
-python GRNIToolS_DL --method STGRNS --epoch 200 --batch_size 64 --expr_file example/E.coli/Deeplearning_data/expression.csv --cuda 0 --lr 0.0001 --tf_path example/E.coli/TFlist.txt --gene_path example/E.coli/genelist.txt --network_path example/E.coli/Deeplearning_data/train_val_test/train.txt --val_network_path example/E.coli/Deeplearning_data/train_val_test/val.txt --test_network_path example/E.coli/Deeplearning_data/train_val_test/random_test.txt --TF_network_path example/E.coli/Deeplearning_data/train_val_test/TF_test.txt --output_path output/test/
+python GRNIToolS_DL --method STGRNS --epoch 200 --batch_size 64 --cuda 0 --lr 0.0001
+--expr_file example/E.coli/Deeplearning_data/expression.csv
+--tf_path example/E.coli/TFlist.txt
+--gene_path example/E.coli/genelist.txt
+--network_path example/E.coli/Deeplearning_data/train_val_test/train.txt
+--val_network_path example/E.coli/Deeplearning_data/train_val_test/val.txt
+--test_network_path example/E.coli/Deeplearning_data/train_val_test/random_test.txt
+--TF_network_path example/E.coli/Deeplearning_data/train_val_test/TF_test.txt
+--output_path output/test/
 ```
