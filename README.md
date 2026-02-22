@@ -26,7 +26,6 @@ For detailed installation, usage instructions, and examples, please refer to the
 * **Environment:** R v4.2.3
 * **Description:** This core R package serves as the evaluation backbone and traditional inference engine. It wraps 31 GRN inference algorithms.
 * **Features:** Integrates R-based algorithms using default parameters.
-* Supports multithreading (via the `doParallel` package) for customized algorithm implementations.
 * **Documentation:** Please see the [`./GRNIToolS/README.md`] for full details.
 
 
