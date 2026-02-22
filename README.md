@@ -1,6 +1,6 @@
 
 
-# GRNIToolS: A Benchmark Toolkit for Gene Regulatory Network Inference
+# GRNIToolS: Gene Regulatory Network Tools Selector
 
 **GRNIToolS** provides an efficient and reproducible evaluation pipeline for Gene Regulatory Network (GRN) inference. By integrating a wide array of inference methods into a suite of user-friendly tools, it accommodates different algorithm categories and platform requirements through three specialized modules.
 
