@@ -1,4 +1,0 @@
-This directory is not stored in git: its files are too large for a
-GitHub repository. Download the archive from Zenodo and unpack it here.
-
-  Zenodo record : https://doi.org/10.5281/zenodo.18503007
