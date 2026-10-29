@@ -3,6 +3,7 @@
 archive
 
 # Run outputs and caches: never part of the image
+results
 GRNIToolS_DL/results
 GRNIToolS_DL/GRN_output
 GRNIToolS_scFM/output
