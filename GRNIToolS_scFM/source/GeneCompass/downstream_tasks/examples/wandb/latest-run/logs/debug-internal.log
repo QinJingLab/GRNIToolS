@@ -1,0 +1,16 @@
+{"time":"2024-11-03T17:08:32.066089217+08:00","level":"INFO","msg":"using version","core version":"0.18.3"}
+{"time":"2024-11-03T17:08:32.066148089+08:00","level":"INFO","msg":"created symlink","path":"/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/downstream_tasks/examples/wandb/offline-run-20241103_170831-ojq4lbrb/logs/debug-core.log"}
+{"time":"2024-11-03T17:08:32.081413714+08:00","level":"INFO","msg":"created new stream","id":"ojq4lbrb"}
+{"time":"2024-11-03T17:08:32.081465304+08:00","level":"INFO","msg":"stream: started","id":"ojq4lbrb"}
+{"time":"2024-11-03T17:08:32.081481075+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:08:32.081502102+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:08:32.081492344+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:08:32.087649023+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-11-03T17:08:32.08901577+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-03T17:15:00.353951813+08:00","level":"INFO","msg":"stream: closing","id":"ojq4lbrb"}
+{"time":"2024-11-03T17:15:00.354031183+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-03T17:15:00.361512323+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-03T17:15:00.36189088+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:15:00.36193215+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:15:00.36192608+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ojq4lbrb"}}
+{"time":"2024-11-03T17:15:00.362091694+08:00","level":"INFO","msg":"stream: closed","id":"ojq4lbrb"}

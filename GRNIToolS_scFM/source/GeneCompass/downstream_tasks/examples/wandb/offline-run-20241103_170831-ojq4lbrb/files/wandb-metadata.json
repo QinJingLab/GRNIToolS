@@ -1,0 +1,58 @@
+{
+  "os":  "Linux-5.19.0-32-generic-x86_64-with-glibc2.39",
+  "python":  "3.10.15",
+  "startedAt":  "2024-11-03T09:08:31.958449Z",
+  "program":  "<python with no main file>",
+  "git":  {
+    "remote":  "https://github.com/xCompass-AI/GeneCompass.git",
+    "commit":  "74f175bf89c63f9aa6ec14efb001e461442563db"
+  },
+  "root":  "/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/downstream_tasks/examples",
+  "host":  "sysusps-NF5468M6",
+  "username":  "ZYQ",
+  "executable":  "/home/ZYQ/anaconda3/envs/env_GeneCompass/bin/python3.10",
+  "cpu_count":  32,
+  "cpu_count_logical":  64,
+  "gpu":  "[NVIDIA A800 80GB PCIe, NVIDIA A800 80GB PCIe, NVIDIA A800 80GB PCIe, NVIDIA A800 80GB PCIe]",
+  "gpu_count":  4,
+  "disk":  {
+    "/":  {
+      "total":  "470855794688",
+      "used":  "445862871040"
+    }
+  },
+  "memory":  {
+    "total":  "134803304448"
+  },
+  "cpu":  {
+    "count":  32,
+    "countLogical":  64
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A800 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere"
+    },
+    {
+      "name":  "NVIDIA A800 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere"
+    },
+    {
+      "name":  "NVIDIA A800 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere"
+    },
+    {
+      "name":  "NVIDIA A800 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere"
+    }
+  ],
+  "cudaVersion":  "12.2"
+}
