@@ -3,7 +3,6 @@
 archive
 
 # Run outputs and caches: never part of the image
-results
 GRNIToolS_DL/results
 GRNIToolS_DL/GRN_output
 GRNIToolS_scFM/output
@@ -11,5 +10,4 @@ GRNIToolS_scFM/output
 **/*.pyc
 
 # Local-only notes and image tarballs
-readme_old.md
 *.tar.gz
