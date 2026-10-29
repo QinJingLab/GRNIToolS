@@ -131,7 +131,7 @@ docker run -it --rm --gpus all grnitools:latest
 ## Downloading data and model weights
 
 Large datasets, pretrained model weights and the offline Docker image are hosted on Zenodo
-(DOI: [10.5281/zenodo.18503007](https://doi.org/10.5281/zenodo.18503007)):
+(DOI: [10.5281/zenodo.18503006](https://doi.org/10.5281/zenodo.18503006)):
 
 - `GRNIToolS.zip` — code, datasets and model checkpoints for the full pipeline.
 - `grnitools_image.tar.gz` — the offline Docker image.
