@@ -257,10 +257,10 @@ def save_disk(patch_str,dataset,length):
 # out_path = 'scdata/output/'
 out_path = 'scdata/output/'
 
-gene_id_name_path = '/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/downstream_tasks/grn_inference/Gene_id_name_dict.pickle'
+gene_id_name_path = 'scdata/Gene_id_name_dict.pickle'
 with open(gene_id_name_path, 'rb') as f:
     dict1 = pickle.load(f)
-gene_token_path = '/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/downstream_tasks/grn_inference/h_m_token2000W.pickle'
+gene_token_path = 'scdata/h_m_token2000W.pickle'
 with open(gene_token_path, 'rb') as f:
     token_dict = pickle.load(f)
 specices_str = 'human'
@@ -281,7 +281,7 @@ dict1 = dict1_rev
 patch_id = 1
 
 print("Started:")
-df = pd.read_csv("/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/downstream_tasks/grn_inference/DeepSEM-master/BEELINE-data/inputs/scRNA-Seq/hESC/BL--ExpressionData.csv")
+df = pd.read_csv("scdata/BL--ExpressionData.csv")
 df = df.rename(columns={
     'Unnamed: 0': 'cell_id'
 }).set_index('cell_id')

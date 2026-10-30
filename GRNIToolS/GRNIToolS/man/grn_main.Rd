@@ -53,12 +53,12 @@ The class of B are required to be 'matrix' and the dimension of matrix B is u * 
 
 \item{algorithm}{The algorithm of inferring grn. We provide 31 algorithms in this function including
 'Pearson','Spearman','Kendall','WGCNA','BC3NET','C3NET','parmigene_ARACNE.a','parmigene_ARACNE.m','parmigene_CLR','parmigene_MRNET',
-'minet_ARACNE','minet_CLR','minet_MRNET','minet_MRNETB','GeneNet','GENIE3.ET','GENIE3.RF','ENNET,'PCIT','ADMM','ADMMHalf',ADMMHard', 'ITAHalf', 'ITAHard',
-'ISTA', 'SPGL0', 'SPGL1', 'CoSaMP', 'OMP', 'FoBa' and 'LARS'. Defaule: c('Pearson','parmigene_ARACNE.a','parmigene_CLR')}
+'minet_ARACNE','minet_CLR','minet_MRNET','minet_MRNETB','GeneNet','GENIE3.ET','GENIE3.RF','ENNET','PCIT','ADMM','ADMMHalf','ADMMHard', 'ITAHalf', 'ITAHard',
+'ISTA', 'SPGL0', 'SPGL1', 'CoSaMP', 'OMP', 'FoBa' and 'LARS'. Default: c('Pearson','parmigene_ARACNE.a','parmigene_CLR')}
 
 \item{HGSmat}{A matrix which is the high-throughput golden standard. Rows contain genes and columns contain tfs ,the value between in one or zero .}
 
-\item{file}{A connection, or a character string naming the file to write to. The default not save the grn matrix. Default: NULL.}
+\item{file}{If TRUE, save the inferred adjacency matrix to a file named after the algorithm; if FALSE, nothing is written. Default: TRUE.}
 
 \item{verbose}{If set to TRUE, a feedback on the progress of the progress of the calculations is given. Default: TRUE.}
 

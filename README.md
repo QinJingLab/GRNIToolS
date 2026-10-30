@@ -4,7 +4,7 @@ GRNIToolS provides an efficient and reproducible evaluation pipeline for Gene Re
 Network (GRN) inference. By integrating a wide array of inference methods into a suite of
 user-friendly tools, it accommodates different algorithm categories and platform requirements
 through three specialized modules. Every method lives in its own package, and `grn_run.py` at
-the repository root gives all 51 of them a single command line without changing how any of
+the repository root gives all 50 of them a single command line without changing how any of
 them works.
 
 Repository: <https://github.com/QinJingLab/GRNIToolS>
@@ -15,7 +15,7 @@ Repository: <https://github.com/QinJingLab/GRNIToolS>
 |---|---|
 | `GRNIToolS/` | The R package: 31 algorithms, plus `GRNIToolS_data/` with 11 datasets |
 | `GRNIToolS_DL/` | 10 deep learning methods, plus `Input_data/` |
-| `GRNIToolS_scFM/` | 10 methods built on single-cell foundation models |
+| `GRNIToolS_scFM/` | 9 methods built on single-cell foundation models |
 | `gold_standard_networks/` | Reference gold-standard edge lists, separate from the labels the pipelines use |
 | `grn_run.py` | Unified command line over all three packages |
 | `grnitools.yaml`, `install_deps.R` | The shared conda environment and the R packages conda does not carry |
@@ -41,10 +41,10 @@ bootstrap stability, precision/recall/F1/TP/FP/FN, and elapsed time.*
 - **`GRNIToolS_DL/` (Python 3.10, PyTorch 2.1.2, 10 methods)** — DeepSEM, DeepDRIM, GRNCNN,
   GRNResNet, STGRNS, GRNTrans, GENELINK, GRNGCN, IGEGRNS, DeepRIG. Launched by `main.py`;
   training runs with default parameters or with Optuna hyperparameter search (`--opt`).
-- **`GRNIToolS_scFM/` (Python 3.10, PyTorch 2.1.2, 10 methods)** — gene embeddings from a
+- **`GRNIToolS_scFM/` (Python 3.10, PyTorch 2.1.2, 9 methods)** — a classifier (`cos`, `logit`,
+  `rf`, `xgb`, `MLP`, `ResNet`, `CNN`, `Transformer`, `GCN`) applied to the gene embeddings of a
   pretrained biological language model (GenePT, Gene2vec, Geneformer, GeneCompass, scBERT,
-  scFoundation, scGPT, CellPLM, iSEEEK) plus a lightweight classifier (`cos`, `logit`, `rf`,
-  `xgb`, `MLP`, `ResNet`, `CNN`, `Transformer`, `GCN`). Launched by `main.py train`.
+  scFoundation, scGPT, CellPLM, iSEEEK). Launched by `main.py train`.
 
 Installation, data formats, method lists and evaluation details are documented in each
 package's own README:
@@ -69,7 +69,7 @@ pip install -r GRNIToolS_scFM/requirements.txt
 
 ```bash
 conda activate grnitools        # required: the Python backends spawn children with a bare `python`
-python grn_run.py --list        # 51 methods and which package has which dataset
+python grn_run.py --list        # 50 methods and which package has which dataset
 ```
 
 ```bash
@@ -90,7 +90,7 @@ Each run writes into `results/<method>/`;
 
 | Flag | Meaning |
 |---|---|
-| `--method` | one of the 51 names; see `--list` |
+| `--method` | one of the 50 names; see `--list` |
 | `--dataset` | canonical dataset name, mapped onto each package's own spelling |
 | `--output` | output root, default `results`; each run gets `<output>/<method>/` |
 | `--list` | print methods and dataset coverage |
@@ -134,7 +134,9 @@ Large datasets, pretrained model weights and the offline Docker image are hosted
 (DOI: [10.5281/zenodo.18503006](https://doi.org/10.5281/zenodo.18503006)):
 
 - `GRNIToolS.zip` — code, datasets and model checkpoints for the full pipeline.
+- `gold_standard_networks.zip` — the reference gold-standard edge lists.
 - `grnitools_image.tar.gz` — the offline Docker image.
+
 
 ## Contact
 

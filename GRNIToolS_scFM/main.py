@@ -5,7 +5,7 @@ from modules.evaluator import evaluate
 import warnings
 warnings.filterwarnings("ignore", message="TypedStorage is deprecated")
 
-METHOD_CHOICES = ['cos', 'logit', 'rf', 'svm', 'xgb', 'MLP', 'ResNet', 'CNN', 'Transformer', 'GCN']
+METHOD_CHOICES = ['cos', 'logit', 'rf', 'xgb', 'MLP', 'ResNet', 'CNN', 'Transformer', 'GCN']
 
 
 def get_parser():

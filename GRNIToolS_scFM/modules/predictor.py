@@ -200,7 +200,7 @@ def run_ml(gene_embeddings, checkpoint, df_test_grn, output_dir, llm, ml_method)
     predict_grn.to_csv(f'{output_dir}/{llm}_{ml_method}_inference_grn.txt', sep='\t', header=True, index=False)
 
 def predict_biollm(llm, pt, method, model_path, expr_path, test_path, species, output, train_path=None):
-    ml_methods = ['logit', 'rf', 'svm', 'xgb']
+    ml_methods = ['logit', 'rf', 'xgb']
     dl_methods = ['MLP', 'ResNet', 'CNN', 'Transformer', 'GCN']
 
     output_dir = f'{output}/{llm}/'

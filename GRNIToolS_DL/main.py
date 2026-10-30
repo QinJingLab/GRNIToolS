@@ -31,8 +31,8 @@ NAME_LIST_METHODS = {'GENELINK': ('tf', 'gene'), 'DeepDRIM': ('gene',),
 AUX_DIR_METHODS = {'DeepRIG': 'DeepRIG'}
 
 # The four split files under Input_data/<dataset>/GRNDL/, derived from --expr's directory.
-SPLIT_FILES = {'train': 'train.txt', 'valid': 'val.txt',
-               'test': 'random_test.txt', 'tftest': 'TF_test.txt'}
+SPLIT_FILES = {'train': ('train.txt',), 'valid': ('val.txt',),
+               'test': ('random_test.txt', 'test.txt'), 'tftest': ('TF_test.txt',)}
 
 # IGEGRNS takes its own splits: they index genes by row number and carry a header.
 SPLIT_OVERRIDES = {'IGEGRNS': {'train': 'train.tsv', 'valid': 'val.tsv',
@@ -542,8 +542,12 @@ def resolve_split_paths(args):
         base = os.path.join(os.path.dirname(dataset_dir), 'IGEGRNS')
     else:
         base = dataset_dir
-    paths = {flag: os.path.join(base, name)
-             for flag, name in (layout or SPLIT_FILES).items()}
+    paths = {}
+    for flag, spec in (layout or SPLIT_FILES).items():
+        names = (spec,) if isinstance(spec, str) else tuple(spec)
+        found = next((os.path.join(base, n) for n in names
+                      if os.path.exists(os.path.join(base, n))), None)
+        paths[flag] = found or os.path.join(base, names[0])
     for flag, path in paths.items():
         if getattr(args, flag) is None:
             setattr(args, flag, path)

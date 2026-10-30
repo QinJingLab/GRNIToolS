@@ -7,7 +7,7 @@ from joblib import dump
 from sklearn.metrics import roc_auc_score, average_precision_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
+
 from xgboost import XGBClassifier
 from models import base_models as dl
 from utils import gene_embedding as ge
@@ -90,7 +90,7 @@ def predict(input_dataloader, dl_method, feature_len, save_path):
 
 def train(model, train_dataloader, valid_dataloader, epochs, lr, save_path):
     model = model.to(DEVICE)
-    criterion = nn.BCEWithLogitsLoss() 
+    criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-5)
 
     best_val_auc = 0
@@ -157,7 +157,7 @@ def train(model, train_dataloader, valid_dataloader, epochs, lr, save_path):
                 
                 label = label.to(torch.float32).to(DEVICE)
                 link_pred = output.sigmoid().reshape(-1)
-                
+
                 all_label.extend(label.cpu().numpy().flatten().tolist())
                 all_link_pred.extend(link_pred.cpu().numpy().tolist())
 
@@ -345,7 +345,6 @@ def run_ml(gene_embeddings, df_train_grn, df_valid_grn, df_test_grn, df_tftest_g
         'rf': RandomForestClassifier,
         'xgb': XGBClassifier,
         'logit': LogisticRegression,
-        'svm': lambda: SVC(probability=True)
     }
     
     if ml_method in models_map:
@@ -383,7 +382,7 @@ def run_ml(gene_embeddings, df_train_grn, df_valid_grn, df_test_grn, df_tftest_g
         f.write(s_file)
 
 def run_biollm(llm, pt, method, expr_path, train_path, valid_path, test_path, tftest_path, output, batch_size, epochs, lr, species='human'):
-    ml_methods = ['logit', 'rf', 'svm', 'xgb']
+    ml_methods = ['logit', 'rf', 'xgb']
     dl_methods = ['MLP', 'ResNet', 'CNN', 'Transformer', 'GCN']
 
     output_dir = f'{output}/{llm}/'

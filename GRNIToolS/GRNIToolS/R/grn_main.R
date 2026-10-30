@@ -17,10 +17,10 @@
 #' @param cl.cores The number of cores in computer that you want to utilize. Default: 2.
 #' @param algorithm The algorithm of inferring grn. We provide 31 algorithms in this function including
 #' 'Pearson','Spearman','Kendall','WGCNA','BC3NET','C3NET','parmigene_ARACNE.a','parmigene_ARACNE.m','parmigene_CLR','parmigene_MRNET',
-#' 'minet_ARACNE','minet_CLR','minet_MRNET','minet_MRNETB','GeneNet','GENIE3.ET','GENIE3.RF','ENNET,'PCIT','ADMM','ADMMHalf',ADMMHard', 'ITAHalf', 'ITAHard',
-#' 'ISTA', 'SPGL0', 'SPGL1', 'CoSaMP', 'OMP', 'FoBa' and 'LARS'. Defaule: c('Pearson','parmigene_ARACNE.a','parmigene_CLR')
+#' 'minet_ARACNE','minet_CLR','minet_MRNET','minet_MRNETB','GeneNet','GENIE3.ET','GENIE3.RF','ENNET','PCIT','ADMM','ADMMHalf','ADMMHard', 'ITAHalf', 'ITAHard',
+#' 'ISTA', 'SPGL0', 'SPGL1', 'CoSaMP', 'OMP', 'FoBa' and 'LARS'. Default: c('Pearson','parmigene_ARACNE.a','parmigene_CLR')
 #' @param HGSmat A matrix which is the high-throughput golden standard. Rows contain genes and columns contain tfs ,the value between in one or zero .
-#' @param file A connection, or a character string naming the file to write to. The default not save the grn matrix. Default: NULL.
+#' @param file If TRUE, save the inferred adjacency matrix to a file named after the algorithm; if FALSE, nothing is written. Default: TRUE.
 #' @param verbose If set to TRUE, a feedback on the progress of the progress of the calculations is given. Default: TRUE.
 #' @param bootstrap_num Number of the times of resampling with bootstrap method.The number of new datasets.Default: 5.
 #' @param bootstrap_seed If set to True, set.seed for keeping the results the same for each run. Default: TRUE.
@@ -75,7 +75,7 @@ grn_main <- function(A=NULL, B ,seq=NULL, X=NULL, max.steps = 200, TF=NULL, gene
             if (sum(abs(X))!=0) {
               reg_name <- paste0(alg,'_bootstrap',nt,'_CHIP.txt')
             }else{reg_name <- paste0(alg,'_bootstrap',nt,'.txt')}
-            temp <- demo_reg(A,B=datexpr,seq,X,alg,max.steps,TF,gene,p=p,tau=10,cl.cores,file=reg_name,verbose = verbose)
+            temp <- demo_reg(A,B=datexpr,seq,X,alg,max.steps,TF,gene,p=p,tau=tau,cl.cores,file=reg_name,verbose = verbose)
           }else{ temp <- demo_other(datexpr=datexpr,algorithm = alg,TF=TF,gene=gene,file=paste0(alg,'_bootstrap',nt,'.txt'),cl.cores=cl.cores,verbose = verbose)}
 
         }else {
@@ -83,7 +83,7 @@ grn_main <- function(A=NULL, B ,seq=NULL, X=NULL, max.steps = 200, TF=NULL, gene
             if (sum(abs(X))!=0) {
               reg_name <- paste0(alg,'_CHIP.txt')
             }else{reg_name <- paste0(alg,'.txt')}
-            temp <- demo_reg(A,B=datexpr,seq,X,alg,max.steps,TF,gene,p=p,tau=10,cl.cores=cl.cores,file=reg_name,verbose = verbose)
+            temp <- demo_reg(A,B=datexpr,seq,X,alg,max.steps,TF,gene,p=p,tau=tau,cl.cores=cl.cores,file=reg_name,verbose = verbose)
           }else {temp <- demo_other(datexpr=datexpr,algorithm = alg,TF=TF,gene=gene,file=paste0(alg,'.txt'),cl.cores=cl.cores,verbose = verbose)}}
 
         grn <- temp$grn
@@ -114,7 +114,7 @@ grn_main <- function(A=NULL, B ,seq=NULL, X=NULL, max.steps = 200, TF=NULL, gene
     if (!file){
       for (datexpr in B) {
         if (alg %in% reg_algorithm) {
-          temp <- demo_reg(A,B=datexpr,seq = seq,X,alg,max.steps,TF,gene,p=p,tau=10,cl.cores = cl.cores,file=NULL,verbose = verbose)
+          temp <- demo_reg(A,B=datexpr,seq = seq,X,alg,max.steps,TF,gene,p=p,tau=tau,cl.cores = cl.cores,file=NULL,verbose = verbose)
         }else{temp <- demo_other(datexpr=datexpr,algorithm = alg,TF=TF,gene=gene,file=NULL,cl.cores=cl.cores,verbose = verbose)}
         grn <- temp$grn
         time <- temp$time

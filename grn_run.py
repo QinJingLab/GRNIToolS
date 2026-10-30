@@ -24,7 +24,7 @@ R_METHODS = R_REGRESSION + R_OTHER
 DL_METHODS = ['DeepSEM', 'DeepDRIM', 'GRNCNN', 'GRNResNet', 'STGRNS', 'GRNTrans',
               'GENELINK', 'GRNGCN', 'IGEGRNS', 'DeepRIG']
 
-SCFM_METHODS = ['cos', 'logit', 'rf', 'svm', 'xgb', 'MLP', 'ResNet', 'CNN',
+SCFM_METHODS = ['cos', 'logit', 'rf', 'xgb', 'MLP', 'ResNet', 'CNN',
                 'Transformer', 'GCN']
 
 # Canonical dataset name -> each package's own spelling; None means that package has no such data.
@@ -59,20 +59,26 @@ rd <- function(p) {
 }
 A <- rd(first(file.path(d, 'A')))
 B <- rd(first(file.path(d, 'B')))
-TF <- readLines(first(file.path(d, c('TFlist', 'TF'))))
-gene <- readLines(first(file.path(d, c('genelist', 'gene'))))
-TF <- TF[nzchar(TF)]; gene <- gene[nzchar(gene)]
+readvec <- function(p) {
+  x <- unlist(strsplit(trimws(readLines(p)), '\t', fixed = TRUE))
+  x[nzchar(x)]
+}
+TF <- readvec(first(file.path(d, c('TFlist', 'TF'))))
+gene <- readvec(first(file.path(d, c('genelist', 'gene'))))
 HGS <- read.delim(first(file.path(d, 'HGS')), header = FALSE)
 HGSmat <- HGSt(TF, gene, HGS)
 xp <- file.path(d, 'InitialX.txt')
-X <- if (file.exists(xp)) as.matrix(read.delim(xp, header = FALSE)) else matrix(0, nrow(B), ncol(A))
+X <- if (file.exists(xp)) as.matrix(read.delim(xp, header = FALSE)) else matrix(0, nrow(B), nrow(A))
 cat(sprintf('A %dx%d  B %dx%d  TF %d  gene %d  HGS nnz %d\n',
             nrow(A), ncol(A), nrow(B), ncol(B), length(TF), length(gene), sum(HGSmat != 0)))
+if (sum(HGSmat != 0) == 0) stop('gold standard is empty: TF/gene names in ', d, ' do not match HGS')
 # opts carries "name=value;name=value" overrides; empty means the package's own defaults.
 extra <- list()
 if (nzchar(opts)) for (piece in strsplit(opts, ';')[[1]]) { kv <- strsplit(piece, '=')[[1]]
   extra[[kv[1]]] <- type.convert(kv[2], as.is = TRUE) }
-res <- do.call(grn_main, c(list(A = A, B = B, seq = seq_len(ncol(B)), X = X, TF = TF,
+sp <- if (nrow(A) > 1) seq_len(min(10L, nrow(A) - 1L)) else stop('need at least two TFs')
+cat(sprintf('sparsity 1:%d  (TF %d)\n', length(sp), nrow(A)))
+res <- do.call(grn_main, c(list(A = A, B = B, seq = sp, X = X, TF = TF,
                                 gene = gene, algorithm = alg, HGSmat = HGSmat,
                                 file = FALSE, verbose = TRUE), extra))
 write.table(res, out, sep = '\t', quote = FALSE, row.names = FALSE)
@@ -126,6 +132,9 @@ def build_scfm(method, dataset, out, pt):
                  if f.endswith('expression.csv')), None)
     if expr is None:
         sys.exit(f'no expression matrix in {d}')
+    # scFM runs with cwd=SCFM_DIR, so every path goes over relative to that directory
+    rel = lambda p: os.path.relpath(p, SCFM_DIR)
+    pt = rel(pt if os.path.isabs(pt) else os.path.join(HERE, pt))
     # scFM names the validation split valid.txt on the human sets and val.txt on the mESC ones.
     def split(name, alt=None):
         p = pick_file(d, name)
@@ -133,9 +142,9 @@ def build_scfm(method, dataset, out, pt):
             p = pick_file(d, alt)
         if p is None:
             sys.exit(f'no {name} split in {d}')
-        return p
+        return rel(p)
     cmd = [sys.executable, 'main.py', 'train', '--method', method,
-           '-expr', expr,
+           '-expr', rel(expr),
            '-train', split('train'), '-valid', split('valid', 'val'),
            '-test', split('test'), '-tftest', split('TF_test'),
            '--pt', pt, '-o', out]
@@ -188,9 +197,13 @@ def main():
     p.add_argument('--r-bootstrap', type=int,
                    help='passed to grn_main as bootstrap_num (default 1, i.e. no resampling)')
     p.add_argument('--r-sym', choices=['true', 'false'], help='passed to grn_main as sym')
-    p.add_argument('--pt', default=os.path.join(SCFM_DIR, 'model_file', 'GenePT',
+    p.add_argument('--r-threshold', type=float,
+                   help='passed to grn_main as threshold (default 0, the package default)')
+    p.add_argument('--r-cores', type=int,
+                   help='passed to grn_main as cl.cores (default 2, the package default)')
+    p.add_argument('--pt', default=os.path.join('GRNIToolS_scFM', 'model_file', 'GenePT',
                                                 'GenePT_gene_embedding_ada_text.pickle'),
-                   help='scFM gene-embedding file')
+                   help='scFM gene-embedding file, relative to the repository root')
     p.add_argument('extra', nargs=argparse.REMAINDER)
     args = p.parse_args()
 
@@ -221,6 +234,10 @@ def main():
         opts = [f'bootstrap_num={1 if args.r_bootstrap is None else args.r_bootstrap}']
         if args.r_sym is not None:
             opts.append(f'sym={args.r_sym.upper()}')
+        if args.r_threshold is not None:
+            opts.append(f'threshold={args.r_threshold}')
+        if args.r_cores is not None:
+            opts.append(f'cl.cores={args.r_cores}')
         cmd, cwd = build_r(args.method, args.dataset, os.path.join(target, 'metrics.tsv'),
                            ';'.join(opts))
 

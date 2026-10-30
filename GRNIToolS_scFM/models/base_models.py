@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 from torch_geometric.nn import GCNConv
 
-class GRNCNN(nn.Module):  
+class GRNCNN(nn.Module):
     def __init__(self, input_channel=1, output_channel=64, kernel_size=3,stride=1,padding=1,hidden =128):  
         super(GRNCNN, self).__init__()  
         self.conv1 = nn.Sequential(
@@ -159,11 +159,8 @@ class GRNTrans(nn.Module):
         # positional encoding
         self.pos_encoder = nn.Parameter(torch.randn(1, 2, d_model))
 
-        # classifier
-        self.classifier = nn.Sequential(
-            nn.Linear(d_model, 1),
-            nn.Sigmoid()
-        )
+        # classifier: raw logits, BCEWithLogitsLoss applies the sigmoid
+        self.classifier = nn.Linear(d_model, 1)
 
     def forward(self, x1, x2):
         # encode each gene separately: [batch_size, d_model]

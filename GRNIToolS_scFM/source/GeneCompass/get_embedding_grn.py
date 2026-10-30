@@ -308,8 +308,7 @@ def get_embedded(data, gene_id_name_path, gene_token_path, grn_gene_path = None)
     knowledges['peca_grn'] = out[3]
     knowledges['homologous_gene_human2mouse'] = out[4]  
 
-    checkpoint_path = './models/GeneCompass_Base'
-    checkpoint_path = '/mnt/sdb/ZYQ/workspace/GRN_LLM/model_file/GeneCompass/GeneCompass_Base'
+    checkpoint_path = '../../model_file/GeneCompass/GeneCompass_Base'
     model = BertForMaskedLM.from_pretrained(
         checkpoint_path,
         knowledges=knowledges,
@@ -326,7 +325,7 @@ def get_embedded(data, gene_id_name_path, gene_token_path, grn_gene_path = None)
             
             new_emb = model.bert.forward(input_ids=input_id, values= values, species=species)[0]
             new_emb = new_emb[:,1:,:].cpu()
-            emb = torch.squeeze(emb, dim = 0)
+            emb = torch.squeeze(new_emb, dim = 0)
             for idx, gene_id in enumerate(data[i]['input_ids']):
                 if gene_id in id_gene:
                     gene_name = id_gene[gene_id]
@@ -338,47 +337,16 @@ def get_embedded(data, gene_id_name_path, gene_token_path, grn_gene_path = None)
     return gene_emb
 
 
-
-
-    # # 计算cosine similarity
-    cos = nn.CosineSimilarity(dim=1, eps=1e-6)
-
-    final = np.zeros((len(gene_name_index), len(gene_name_index)))
-    for i in range(len(gene_name_index)):
-        for j in range(len(gene_name_index)):
-            
-            final[i][j] = cos(emb[gene_name_index[i]].reshape(1, -1), emb[gene_name_index[j]].reshape(1, -1)).cpu().numpy()
-
-    result = copy.deepcopy(final)
-      
-    # index = np.argsort(final.ravel())[::-1][499999]
-    # pos = np.unravel_index(index, final.shape)  
-    # result[final < final[pos]] = 0
-    # result[final >= final[pos]] = 1
-
-    final_emb = []
-    for i in range(len(gene_name_index)):
-        final_emb.append(emb[gene_name_index[i]].reshape(1, -1).numpy())
-
-    final_emb = np.concatenate((final_emb))
-
-    dict_id_gene = {'idx':gene_name_index, 'gene':gene_name}
-    df_id_gene = pd.DataFrame(dict_id_gene)
-
-    return final, final_emb, df_id_gene
-
-
-def save_file(path, final, final_emb, df_id_gene):
-    np.save(f'{path}/embedding.npy', final_emb, allow_pickle=True)
-    np.save(f'{path}/cos_grn.npy', final, allow_pickle=True)
-    df_id_gene.to_csv(f'{path}/gene_id_name.csv', index=False)
+def save_file(path, gene_emb):
+    with open(os.path.join(path, 'gene_embedding.pickle'), 'wb') as f:
+        pickle.dump(gene_emb, f)
 
 def get_opt():
     parser = argparse.ArgumentParser(description='Prepare data for GRN inference')
-    parser.add_argument('--gene_id_name_path', type=str, required=False, default='/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/Gene_id_name_dict.pickle', help='Gene id and name path')
-    parser.add_argument('--gene_token_path', type=str, required=False, default='/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/h_m_token2000W.pickle', help='Gene token path')
+    parser.add_argument('--gene_id_name_path', type=str, required=False, default='../../model_file/GeneCompass/Gene_id_name_dict.pickle', help='Gene id and name path')
+    parser.add_argument('--gene_token_path', type=str, required=False, default='../../model_file/GeneCompass/h_m_token2000W.pickle', help='Gene token path')
     parser.add_argument('--specices_str', type=str, required=False, default='human', help='Specices string')
-    parser.add_argument('--expr_file', type=str, required=False, default='/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/BL--ExpressionData.csv', help='Expression file path')
+    parser.add_argument('--expr_file', type=str, required=False, default='downstream_tasks/gene_expression_profiling/DeepSEM-master/BEELINE-data/inputs/scRNA-Seq/hESC/BL--ExpressionData.csv', help='Expression file path')
     parser.add_argument('--log_c', type=bool, default=False, help='log1p or not')
     parser.add_argument('--output', type=str, required=False, default='./output_embedding', help='Output directory')
     args = parser.parse_args()
@@ -386,10 +354,6 @@ def get_opt():
 
 def main():
     args = get_opt()
-    gene_id_name_path = '/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/Gene_id_name_dict.pickle'
-    gene_token_path = '/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/h_m_token2000W.pickle'
-    grn_gene_path = '/mnt/sdb/ZYQ/workspace/GRN/LLM/GeneCompass/demo_data/GRNgene.pkl'
-    specices_str = 'human'
     gene_id_name_path = args.gene_id_name_path
     gene_token_path = args.gene_token_path
     specices_str = args.specices_str
@@ -400,10 +364,9 @@ def main():
     if not os.path.exists(output):
         os.makedirs(output)
     datasets = prepare_data(gene_id_name_path, gene_token_path, specices_str, expr_file, log_c)
-    final, final_emb, df_id_gene = get_embedded(datasets, gene_id_name_path, gene_token_path, grn_gene_path = None)
-    save_file(output, final, final_emb, df_id_gene)
-    
+    gene_emb = get_embedded(datasets, gene_id_name_path, gene_token_path)
+    save_file(output, gene_emb)
 
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()

@@ -1,5 +1,5 @@
 # GRNIToolS
-Gene Regulatory Network Tools Selector. GRNIToolS is divided into two parts, the R package section and the Python section. The following is an introduction to the R package section, while the specific details of the Python section can be found in GRNIToolS_DL.
+Gene Regulatory Network Tools Selector. GRNIToolS has three parts: the R package in this directory, the deep-learning package in GRNIToolS_DL, and the single-cell foundation-model package in GRNIToolS_scFM. The following introduces the R package; the other two are documented in their own READMEs.
 
 # Introduction
 
@@ -58,7 +58,7 @@ automatically.
 
 ## Preparing data
 
-All data is available at https://doi.org/10.5281/zenodo.12608156. It can also be loaded through `data()`:
+All data is available at https://doi.org/10.5281/zenodo.18503006. It can also be loaded through `data()`:
 ```r
 library(GRNIToolS) 
 data("datalist")

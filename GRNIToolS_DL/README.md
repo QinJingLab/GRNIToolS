@@ -95,7 +95,7 @@ python main.py \
 - `--input_dir`: Input directory (DeepRIG). DeepRIG reads none of `--expr`, `--train`,
   `--valid`, `--test` or `--tftest`; this directory is its entire data interface
 - `--grn`: GRN data file (DeepSEM). Defaults to `./Input_data/Ecoli/GRNDL/grn.txt` and is
-
+  forwarded to the method as `--net_file`
 
 
 ### Training Parameters
@@ -111,7 +111,7 @@ python main.py \
 ### General Parameters
 - `--method`: Method to run (default: GRNCNN). One of the names in the table above; `GRNCNN` and `GRNResNet` both dispatch to `source/GRNDL`
 - `--hidden`: Number of hidden units (GRNGCN, default: 128)
-- `--network`: GRNCNN and GRNResNet only. When 1, reload the best checkpoint once training ends
+- `--network`: GRNCNN, GRNResNet and GRNTrans only. When 1, reload the best checkpoint once training ends
   and write `test_network_predict.txt` — the test pairs with a predicted score appended
   (default: 0)
 - `--head`: Number of attention heads (GRNTrans, default: 4)
